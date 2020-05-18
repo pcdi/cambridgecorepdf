@@ -12,8 +12,10 @@ shopt -s nullglob
 pdftk *.pdf cat output merged.pdf
 
 # Extract section titles from file names
-
-# Extract page numbers from file names
+for filename in *.pdf; do
+    filename=$(echo $filename | cut -d'_' -f5- | sed s/'_'/' '/g | sed s/'\.pdf'//g)
+    echo $filename
+done
 
 # Calculate page numbers for bookmarks
 pageno=1
