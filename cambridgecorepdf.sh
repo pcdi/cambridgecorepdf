@@ -16,12 +16,14 @@ Usage: $(basename "$0") file[.zip]"
 fi
 
 # Unzip the archive
-INFILE=$1
+INFILES=$@
 BOOKNAME=$(echo $1 | cut -d'_' -f2)
 OUTDIR=$BOOKNAME
 
 mkdir $OUTDIR
-unzip $INFILE -d $OUTDIR
+for INFILE in $INFILES; do
+    unzip $INFILE -d $OUTDIR
+done
 cd $OUTDIR
 
 # Make bookmarks
@@ -46,7 +48,7 @@ MERGED=merged.pdf
 pdftk *.pdf cat output $MERGED
 
 # Add bookmarks to pdf
-pdftk $MERGED update_info $BMFILE output out.pdf
+pdftk $MERGED update_info $BMFILE output $BOOKNAME.pdf
 
 # Clean up
 rm $MERGED $BMFILE
