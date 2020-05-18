@@ -9,17 +9,14 @@ shopt -s nullglob
 # Unzip the archive
 
 # Merge files
-pdftk *.pdf cat output merged.pdf
+# pdftk *.pdf cat output merged.pdf
 
-# Extract section titles from file names
-for filename in *.pdf; do
-    filename=$(echo $filename | cut -d'_' -f5- | sed s/'_'/' '/g | sed s/'\.pdf'//g)
-    echo $filename
-done
-
-# Calculate page numbers for bookmarks
 pageno=1
 for file in *.pdf; do
+    # Extract section titles from file names
+    sectiontitle=$(echo $file | cut -d'_' -f5- | sed s/'_'/' '/g | sed s/'\.pdf'//g)
+    echo $sectiontitle
+    # Calculate page numbers for bookmarks
     echo $pageno
     pageno=$(($pageno+$(pdftk $file dump_data | awk '/'NumberOfPages'/ {print $2}')))
 done
