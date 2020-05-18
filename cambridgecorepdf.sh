@@ -6,7 +6,23 @@ shopt -s nullglob
 #
 # Dependencies: pdftk awk
 
+if [[ "$#" -eq 0 ]] || [[ "$1" == "-h" ]]; then
+  echo "Cambridge Core PDF Tool 2020-05-18 Philipp Immel
+This tool works on zip archives of PDFs downloaded from Cambridge Core.
+It extracts the archives, merges the PDFs into one PDF and adds chapter bookmarks. 
+
+Usage: $(basename "$0") file[.zip]"
+  exit 0
+fi
+
 # Unzip the archive
+INFILE=$1
+BOOKNAME=$(echo $1 | cut -d'_' -f2)
+OUTDIR=$BOOKNAME
+
+mkdir $OUTDIR
+unzip $INFILE -d $OUTDIR
+cd $OUTDIR
 
 # Make bookmarks
 BMFILE=bookmarks.txt
