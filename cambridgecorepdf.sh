@@ -7,7 +7,7 @@ shopt -s nullglob
 # Dependencies: pdftk awk
 
 if [[ "$#" -eq 0 ]] || [[ "$1" == "-h" ]]; then
-  echo "Cambridge Core PDF Tool 2020-05-18 Philipp Immel
+  echo "Cambridge Core PDF Tool 2020-05-19 Philipp Immel
 This tool works on zip archives of PDFs downloaded from Cambridge Core.
 It extracts the archives, merges the PDFs into one PDF and adds chapter bookmarks. 
 
