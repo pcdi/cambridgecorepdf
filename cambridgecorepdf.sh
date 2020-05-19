@@ -41,7 +41,10 @@ for file in *.pdf; do
     # Extract section titles from file names
     sectiontitle=$(echo $file | cut -d'_' -f5- | sed s/'_'/' '/g | sed s/'\.pdf'//g)
     echo "BookmarkTitle:" $sectiontitle >> $BMFILE
-    echo "BookmarkLevel: 1" >> $BMFILE
+
+    # Extract bookmark level from file names
+    bookmarklevel=$(echo $file | sed 's/\(\.0\)\{1,\}//g' | grep -io '\.' | wc -l)
+    echo "BookmarkLevel:" $bookmarklevel >> $BMFILE
     
     # Calculate page numbers for bookmarks
     echo "BookmarkPageNumber:" $pageno >> $BMFILE
