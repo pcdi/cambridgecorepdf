@@ -11,7 +11,7 @@ if [[ "$#" -eq 0 ]] || [[ "$1" == "-h" ]]; then
 This tool works on zip archives of PDFs downloaded from Cambridge Core.
 It extracts the archives, merges the PDFs into one PDF and adds chapter bookmarks. 
 
-Usage: $(basename "$0") file[.zip]"
+Usage: $(basename "$0") file[.zip] [...]"
   exit 0
 fi
 
@@ -25,6 +25,11 @@ for INFILE in $INFILES; do
     unzip $INFILE -d $OUTDIR
 done
 cd $OUTDIR
+
+# Unify file naming for correct order, pad leading zeroes, pad trailing zero
+for file in *.pdf; do
+    mv $file $(echo $file | sed -e 's/^[0-9]\{1\}\./00&/g; s/^[0-9]\{2\}\./0&/g; s/\([0-9]\)_/\1.0_/')
+done
 
 # Make bookmarks
 BMFILE=bookmarks.txt
