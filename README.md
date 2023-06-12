@@ -1,3 +1,7 @@
+# Archived
+
+This project is archived, please see the improved version [here]( https://github.com/pcdi/cambridge_core_downloader).
+
 # Cambridge Core PDF Tool
 This tool provides functionality toward PDFs downloaded from [Cambridge Core](https://www.cambridge.org/core). It extracts the archive(s), merges the PDFs into one PDF and adds chapter bookmarks. 
 
